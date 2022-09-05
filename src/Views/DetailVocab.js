@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import styles from '../component/Style';
 import Vocabulary from '../Data/Data';
 import GestureFlipView from 'react-native-gesture-flip-card';
@@ -10,7 +16,6 @@ const DetailVocab = ({route}) => {
   const [currentIndex, setCurrentIndex] = useState(
     detail.vocabGroup.indexOf(currentWord),
   );
-  console.log(detail.vocabGroup.indexOf(currentWord));
 
   const getWord = type => {
     if (type === 'next' && currentIndex < detail.vocabGroup.length - 1) {
@@ -57,6 +62,10 @@ const DetailVocab = ({route}) => {
             <View style={styles.button}>
               <TouchableOpacity onPress={() => getWord('pre')}>
                 <Text style={styles.status}>Back</Text>
+                <Image
+                  source={require('../component/images/back1.png')}
+                  style={styles.icon_choose}
+                />
               </TouchableOpacity>
             </View>
           )}
@@ -67,6 +76,10 @@ const DetailVocab = ({route}) => {
             <View style={styles.button}>
               <TouchableOpacity onPress={() => getWord('next')}>
                 <Text style={styles.status}>Next</Text>
+                <Image
+                  source={require('../component/images/next.png')}
+                  style={styles.icon_choose}
+                />
               </TouchableOpacity>
             </View>
           )}

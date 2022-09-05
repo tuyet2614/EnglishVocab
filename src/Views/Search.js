@@ -12,7 +12,7 @@ import {
 import styles from '../component/Style';
 import Vocabulary from '../Data/Data';
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [filterData, setFilterData] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -38,52 +38,40 @@ const Search = () => {
   };
 
   return (
-    console.log(filterData),
-    (
-      <View>
-        <View style={styles.Search}>
-          <TextInput
-            style={{flex: 1, padding: 5}}
-            placeholder="Search..."
-            onChangeText={text => searchFilter(text)}
-            value={search}
-          />
-          <Image
-            source={require('../component/images/search.png')}
-            style={styles.icon}
-          />
-        </View>
-
-        <View>
-          <ScrollView>
-            {/* {Vocabulary.map(item => (
-                        item.vocab.map(vocab => (
-
-                            <TouchableOpacity style={styles.item} key={item.vocab.id}>
-                                <Text style={styles.folder}>{vocab.title}</Text>
-                                <Text style={styles.folder}>{vocab.mean}</Text>
-                            </TouchableOpacity>
-
-                        ))
-                    ))} */}
-
-            {/* {Vocabulary.map(item =>
-            item.vocab.map(vocab => {
-              console.log('vocab:', vocab);
-            }),
-          )} */}
-
-            {filterData.map(item => (
-              <TouchableOpacity style={styles.item} key={item.id}>
-                <Text style={styles.folder}>{item.title}</Text>
-                {console.log('title', filterData)}
-                <Text style={styles.folder}>{item.mean}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
+    <View>
+      <View style={styles.Search}>
+        <TextInput
+          style={{flex: 1, padding: 5}}
+          placeholder="Search..."
+          onChangeText={text => searchFilter(text)}
+          value={search}
+        />
+        <Image
+          source={require('../component/images/search.png')}
+          style={styles.icon_search}
+        />
       </View>
-    )
+
+      <View>
+        <ScrollView>
+          {filterData.map(item => (
+            <TouchableOpacity
+              style={styles.item}
+              key={item.id}
+              onPress={() => {
+                navigation.navigate('DetailWord', {
+                  vocabGroup: Vocabulary,
+                  detail: item,
+                });
+              }}>
+              <Text style={styles.group}>{item.title}</Text>
+
+              <Text style={styles.group}>{item.mean}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+    </View>
   );
 };
 

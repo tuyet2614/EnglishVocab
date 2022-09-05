@@ -13,7 +13,7 @@ import Vocabulary from '../Data/Data';
 
 const Item = ({item, onPress}) => (
   <TouchableOpacity onPress={onPress} style={styles.item}>
-    <Text style={styles.folder}>{item}</Text>
+    <Text style={styles.group}>{item}</Text>
   </TouchableOpacity>
 );
 
